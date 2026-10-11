@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Github, ExternalLink, X, Code2 } from "lucide-react";
+import { ArrowRight, Github, ExternalLink, X, Code2, CheckCircle2 } from "lucide-react";
 import { PROJECTS, Project } from "@/data/projects";
 
 // Dedicated CSS UI Preview for NUTANA
@@ -195,7 +195,7 @@ export default function Projects() {
           </a>
         </div>
 
-        {/* 4 Cards Grid - Clicking pops up project enlarged modal with Show Source Code */}
+        {/* 4 Clean Project Cards without overlay badges */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {PROJECTS.map((project) => {
             const hasError = imageErrors[project.id];
@@ -204,9 +204,9 @@ export default function Projects() {
               <div
                 key={project.id}
                 onClick={() => setActiveModalProject(project)}
-                className="bg-[#F4F2EB] rounded-2xl border border-[#E2DFD6] overflow-hidden flex flex-col justify-between hover:border-[#5B755D] hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group cursor-pointer"
+                className="bg-[#F4F2EB] rounded-2xl border border-[#E2DFD6] overflow-hidden flex flex-col justify-between hover:border-[#5B755D] hover:shadow-lg hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
               >
-                {/* Visual Area */}
+                {/* Visual Preview Area */}
                 <div className="h-44 sm:h-48 w-full bg-[#E5E1D3] relative overflow-hidden border-b border-[#E2DFD6]">
                   {!hasError ? (
                     <Image
@@ -220,13 +220,6 @@ export default function Projects() {
                   ) : null}
 
                   {hasError && renderFallback(project.placeholderType)}
-
-                  {/* Subtle click indicator tag on hover */}
-                  <div className="absolute inset-0 bg-[#1E2B20]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="px-3 py-1.5 rounded-full bg-[#FAF9F5]/90 text-[11px] font-semibold text-[#141714] shadow-sm transform scale-95 group-hover:scale-100 transition-transform">
-                      Click to Expand
-                    </span>
-                  </div>
                 </div>
 
                 {/* Content Area */}
@@ -262,20 +255,20 @@ export default function Projects() {
                       ))}
                     </div>
 
-                    {/* View Details / Action Footer */}
+                    {/* View Details Link */}
                     <div className="pt-3 border-t border-[#E5E1D3]/80 flex items-center justify-between">
                       <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#273829] group-hover:text-[#5B755D] transition-colors">
-                        <span>Expand Details</span>
+                        <span>View Project</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </span>
 
                       {project.githubUrl ? (
                         <span className="text-[10px] font-mono text-[#5B755D] font-medium bg-[#EFECE2] px-2 py-0.5 rounded">
-                          Source Ready
+                          Source Code
                         </span>
                       ) : (
                         <span className="text-[10px] font-mono text-[#6C756E] italic">
-                          Local Repo
+                          Local
                         </span>
                       )}
                     </div>
@@ -289,73 +282,93 @@ export default function Projects() {
 
       </div>
 
-      {/* Enlarged Project Modal */}
+      {/* Compact, Scrollable Project Window Modal */}
       {activeModalProject && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-5 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveModalProject(null)}
         >
           <div
-            className="bg-[#FAF9F5] w-full max-w-2xl rounded-3xl border border-[#C8C5B9] shadow-2xl overflow-hidden flex flex-col transform scale-100 animate-in zoom-in-95 duration-200"
+            className="bg-[#FAF9F5] w-full max-w-lg rounded-2xl border border-[#C8C5B9] shadow-2xl overflow-hidden flex flex-col max-h-[85vh] transform scale-100 animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#E2DFD6] bg-[#F4F2EB]">
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#E2DFD6] bg-[#F4F2EB] shrink-0">
               <div>
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#5B755D] font-bold">
                   {activeModalProject.category}
                 </span>
-                <h3 className="font-display text-xl sm:text-2xl font-extrabold text-[#141714]">
+                <h3 className="font-display text-base sm:text-lg font-extrabold text-[#141714]">
                   {activeModalProject.title}
                 </h3>
               </div>
               <button
                 onClick={() => setActiveModalProject(null)}
                 aria-label="Close modal"
-                className="p-2 rounded-full hover:bg-[#EFECE2] text-[#4B534C] hover:text-[#141714] transition-colors"
+                className="p-1.5 rounded-full hover:bg-[#EFECE2] text-[#4B534C] hover:text-[#141714] transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Modal Enlarged Preview */}
-            <div className="h-64 sm:h-72 w-full bg-[#E5E1D3] relative overflow-hidden border-b border-[#E2DFD6]">
-              {!imageErrors[activeModalProject.id] ? (
-                <Image
-                  src={activeModalProject.image}
-                  alt={activeModalProject.title}
-                  fill
-                  sizes="650px"
-                  className="object-cover object-top"
-                  onError={() => handleImageError(activeModalProject.id)}
-                />
-              ) : null}
+            {/* Scrollable Modal Content */}
+            <div className="overflow-y-auto p-5 sm:p-6 space-y-5">
+              
+              {/* Preview Thumbnail */}
+              <div className="h-44 w-full bg-[#E5E1D3] relative rounded-xl overflow-hidden border border-[#E2DFD6] shrink-0">
+                {!imageErrors[activeModalProject.id] ? (
+                  <Image
+                    src={activeModalProject.image}
+                    alt={activeModalProject.title}
+                    fill
+                    sizes="500px"
+                    className="object-cover object-top"
+                    onError={() => handleImageError(activeModalProject.id)}
+                  />
+                ) : null}
 
-              {imageErrors[activeModalProject.id] && renderFallback(activeModalProject.placeholderType)}
-            </div>
+                {imageErrors[activeModalProject.id] && renderFallback(activeModalProject.placeholderType)}
+              </div>
 
-            {/* Modal Body */}
-            <div className="p-6 sm:p-8 flex flex-col gap-6">
+              {/* Detailed Overview */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#6C756E] mb-2 font-mono">
-                  Project Overview
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#6C756E] mb-1.5 font-mono">
+                  Detailed Overview
                 </h4>
-                <p className="text-sm text-[#2E332F] leading-relaxed">
-                  {activeModalProject.description}
+                <p className="text-xs sm:text-sm text-[#364A38] leading-relaxed">
+                  {activeModalProject.detailedDescription || activeModalProject.description}
                 </p>
               </div>
 
+              {/* Key Highlights & Architecture */}
+              {activeModalProject.keyFeatures && (
+                <div>
+                  <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#6C756E] mb-2 font-mono">
+                    Key Highlights &amp; Architecture
+                  </h4>
+                  <ul className="space-y-1.5 text-xs text-[#4B534C]">
+                    {activeModalProject.keyFeatures.map((feat, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#5B755D] shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Technologies */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#6C756E] mb-2.5 font-mono">
+                <h4 className="text-[11px] font-bold uppercase tracking-wider text-[#6C756E] mb-2 font-mono">
                   Technologies Applied
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {activeModalProject.technologies.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 rounded-full bg-[#EFECE2] border border-[#C8C5B9] text-xs font-medium text-[#273829]"
+                      className="px-2.5 py-1 rounded-full bg-[#EFECE2] border border-[#C8C5B9] text-[11px] font-medium text-[#273829]"
                     >
                       {tech}
                     </span>
@@ -363,40 +376,41 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Modal Footer with "Show Source Code" button */}
-              <div className="pt-4 border-t border-[#E2DFD6] flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs text-[#6C756E]">
-                  Status: <strong className="text-[#141714]">Completed Engineering Project</strong>
-                </span>
-
-                <div className="flex items-center gap-3">
-                  {activeModalProject.githubUrl ? (
-                    <a
-                      href={activeModalProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#273829] hover:bg-[#1A261B] text-white text-xs sm:text-sm font-semibold tracking-wide transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
-                    >
-                      <Code2 className="w-4 h-4" />
-                      <span>Show Source Code</span>
-                      <ExternalLink className="w-3.5 h-3.5 ml-1 opacity-80" />
-                    </a>
-                  ) : (
-                    <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#EFECE2] border border-[#C8C5B9] text-[#6C756E] text-xs font-medium">
-                      <span>Local Project (Private Codebase)</span>
-                    </div>
-                  )}
-
-                  <button
-                    onClick={() => setActiveModalProject(null)}
-                    className="px-4 py-2.5 rounded-full border border-[#C8C5B9] hover:bg-[#EFECE2] text-xs font-medium text-[#4B534C] transition-colors"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-
             </div>
+
+            {/* Fixed Modal Footer with "Show Source Code" Button */}
+            <div className="p-4 border-t border-[#E2DFD6] bg-[#F4F2EB] shrink-0 flex items-center justify-between gap-3">
+              <span className="text-[11px] text-[#6C756E]">
+                Status: <strong className="text-[#141714]">Completed Locally</strong>
+              </span>
+
+              <div className="flex items-center gap-2">
+                {activeModalProject.githubUrl ? (
+                  <a
+                    href={activeModalProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#273829] hover:bg-[#1A261B] text-white text-xs font-semibold tracking-wide transition-all shadow-sm hover:shadow hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <Code2 className="w-3.5 h-3.5" />
+                    <span>Show Source Code</span>
+                    <ExternalLink className="w-3 h-3 ml-0.5 opacity-80" />
+                  </a>
+                ) : (
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FAF9F5] border border-[#C8C5B9] text-[#6C756E] text-[11px] font-medium">
+                    <span>Local Repository</span>
+                  </div>
+                )}
+
+                <button
+                  onClick={() => setActiveModalProject(null)}
+                  className="px-3 py-1.5 rounded-full border border-[#C8C5B9] hover:bg-[#FAF9F5] text-xs font-medium text-[#4B534C] transition-colors"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
