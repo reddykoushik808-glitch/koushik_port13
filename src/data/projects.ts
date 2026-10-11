@@ -3,6 +3,9 @@ export interface Project {
   title: string;
   category: string;
   description: string;
+  detailedDescription?: string;
+  highlights?: string[];
+  keyFeatures?: string[];
   technologies: string[];
   githubUrl?: string;
   hasWorkingRepo: boolean;
@@ -84,6 +87,13 @@ export const PROJECTS: Project[] = [
     title: "NUTANA",
     category: "Full Stack / AI",
     description: "Inventory intelligence system for Indian neighborhood food retailers with expiry-aware FEFO allocation, cross-shop discovery, and AI-assisted recommendations.",
+    detailedDescription: "NUTANA addresses perishable inventory waste and stock mismanagement across neighborhood kirana and grocery stores. Traditional shops suffer massive losses from expired stock and siloed availability. NUTANA combines First-Expired, First-Out (FEFO) warehouse management algorithms with cross-store collaborative discovery and fast LLM-assisted pricing and restocking recommendations.",
+    keyFeatures: [
+      "Expiry-aware FEFO stock allocation engine prioritizing near-dated inventory",
+      "Cross-shop inventory lookup allowing neighboring retailers to fulfill mutual shortages",
+      "AI-assisted recommendations powered by Groq API for rapid inference and restocking",
+      "FastAPI asynchronous backend with high-throughput MongoDB schema design"
+    ],
     technologies: ["Python", "FastAPI", "MongoDB", "Groq API"],
     githubUrl: "https://github.com/reddykoushik808-glitch/nutana",
     hasWorkingRepo: true,
@@ -95,6 +105,13 @@ export const PROJECTS: Project[] = [
     title: "PlanMyHome",
     category: "Full Stack / Algorithms",
     description: "Custom house planner for drawing plots, configuring setbacks, specifying room needs, and generating aligned layouts using a rule-based constraint engine.",
+    detailedDescription: "PlanMyHome is a CAD-inspired architectural planning application designed for home planners, civil developers, and prospective homeowners. Users draw their land plot boundary, configure municipal setback parameters (front, rear, and side margins), and input their family room requirements. The rule-based engine then aligns wall geometry, hallways, and living zones while adhering strictly to building constraints.",
+    keyFeatures: [
+      "Interactive 2D plot boundary and setback margin calculator",
+      "Constraint satisfaction algorithm calculating functional room alignments and door pathways",
+      "Multi-floor planning with customizable room dimension requirements (Living, Kitchen, Bedrooms, Balcony)",
+      "Instant geometric blueprint rendering with dimensional accuracy"
+    ],
     technologies: ["Web App", "Algorithms", "Planning", "CAD Layout"],
     githubUrl: "https://github.com/reddykoushik808-glitch/House-Flipper-",
     hasWorkingRepo: true,
@@ -106,6 +123,13 @@ export const PROJECTS: Project[] = [
     title: "Customer Churn Investigation",
     category: "Data Analytics / Machine Learning",
     description: "Customer profiling, churn investigation, machine learning risk scoring, and retention strategies on a synthetic boAt consumer electronics dataset.",
+    detailedDescription: "An in-depth data analytics and machine learning pipeline conducted on a synthetic customer dataset inspired by boAt lifestyle electronics. The project investigates customer purchase frequencies, return rates, discount sensitivities, and support interactions to identify behavioral churn drivers and prescribe high-retention marketing interventions.",
+    keyFeatures: [
+      "Comprehensive exploratory data analysis (EDA) and data cleansing with Pandas and NumPy",
+      "Customer behavioral segmentation profiling price-sensitive vs. brand-loyal cohorts",
+      "Supervised ML classification using Scikit-learn with feature importance and risk scoring",
+      "Actionable retention strategy recommendations that reduced simulated churn probability"
+    ],
     technologies: ["Python", "Pandas", "Scikit-learn", "Data Analytics"],
     githubUrl: "https://github.com/reddykoushik808-glitch/customer-churn-analysis",
     hasWorkingRepo: true,
@@ -117,6 +141,13 @@ export const PROJECTS: Project[] = [
     title: "Forecast IQ",
     category: "Predictive Analytics / AI",
     description: "Forecasting web application supporting CSV uploads, predictive machine learning models, trend visualizations, and AI-generated analytical summaries.",
+    detailedDescription: "Forecast IQ empowers business users to forecast temporal metrics without complex data science setups. Users upload raw time-series CSV records, after which automated feature engineering fits regression and ARIMA/prophet-style models to predict upcoming demand cycles. The system pairs visual charts with natural language analytical interpretations synthesized via Gemini and Groq APIs.",
+    keyFeatures: [
+      "Plug-and-play CSV ingestion pipeline with automated time-series timestamp parsing",
+      "Predictive machine learning forecasting models generating confidence intervals",
+      "Interactive interactive visualization charts showing historical vs. projected metrics",
+      "AI-generated summaries explaining seasonal peaks, anomalies, and tactical recommendations"
+    ],
     technologies: ["Python", "Flask", "Machine Learning", "Gemini API", "Groq API"],
     githubUrl: undefined, // No public repo link provided
     hasWorkingRepo: false,
