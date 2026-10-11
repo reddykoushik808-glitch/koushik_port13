@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-cream: #FAF9F5;
+  --bg-cream-card: #F4F2EB;
+  --text-dark: #161815;
+  --text-muted: #565C54;
+  --sage-accent: #48624A;
+  --sage-dark: #1E2B20;
+  --sage-light: #C2D1C1;
+  --sage-soft: #DCE5DB;
+  --border-subtle: #E2DFD6;
+  --border-strong: #C8C5B9;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom styles for editorial aesthetics */
+.editorial-title {
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.handwriting {
+  font-family: var(--font-caveat), 'Caveat', cursive;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar matching the warm cream aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF9F5;
+}
+::-webkit-scrollbar-thumb {
+  background: #C6D3C6;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5B755D;
+}
