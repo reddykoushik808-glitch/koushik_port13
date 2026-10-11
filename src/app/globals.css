@@ -41,7 +41,7 @@ html {
 
 /* Custom scrollbar matching the warm cream aesthetic */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
   background: #FAF9F5;
@@ -52,4 +52,24 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #5B755D;
+}
+
+/* Infinite continuous cyclic marquee animation */
+@keyframes marquee-cycle {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-cycle {
+  display: flex;
+  width: max-content;
+  animation: marquee-cycle 26s linear infinite;
+}
+
+.animate-marquee-cycle:hover {
+  animation-play-state: paused;
 }
