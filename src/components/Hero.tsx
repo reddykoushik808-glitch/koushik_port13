@@ -165,16 +165,9 @@ export default function Hero() {
                 )}
               </div>
 
-              {/* Handwritten annotation on portrait */}
-              <div className="absolute -right-3 sm:-right-7 bottom-10 z-20 pointer-events-none transform rotate-3 flex items-start gap-1">
-                <span className="handwriting text-sm sm:text-base font-bold text-[#273829] leading-tight text-right block max-w-[100px]">
-                  TURNING <br />
-                  DATA INTO <br />
-                  REAL IMPACT
-                </span>
-                <span className="text-[#273829] text-lg font-bold mt-0.5">
-                  &gt;
-                </span>
+              {/* Subtle accent corner sparkle */}
+              <div className="absolute -right-2 bottom-8 z-20 pointer-events-none text-[#364A38]/50">
+                <span className="text-xl font-bold">✦</span>
               </div>
             </div>
           </div>
